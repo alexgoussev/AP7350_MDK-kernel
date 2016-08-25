@@ -1,0 +1,101 @@
+
+/dts-v1/;
+
+#include "mt6735.dtsi"
+
+/ {
+	memory@00000000 {
+		device_type = "memory";
+		reg = <0 0x40000000 0 0x80000000>;
+	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		reserve-memory-ccci_md3 {
+			compatible = "reserve-memory-ccci_md3";
+			no-map;
+			size = <0 0x01000000>;
+			alignment = <0 0x2000000>;
+			alloc-ranges = <0 0x40000000 0 0xC0000000>;
+		};
+	};
+	bus {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges = <0 0 0 0xffffffff>;
+
+		MTKFB@5e200000 {
+			compatible = "mediatek,MTKFB";
+			reg = <0x7F000000 0x1000000>;
+		};
+
+		I2C0@0x11007000 {
+			mt6306@64 {
+				compatible = "mediatek,mt6306";
+				reg = <0x64>;
+			};
+		};
+
+		I2C1@0x11008000 {
+			
+			gt9xx@5d {
+				compatible = "gt9xx";
+				reg = <0x5d>;
+			};
+			
+			yas533@2e {
+				compatible = "yas533";
+				reg = <0x2e>;
+			};
+
+			mpu-6515@68 {
+				compatible = "mpu-6515";
+				reg = <0x68>;
+			};
+
+			bmp180@77 {
+				compatible = "bmp180";
+				reg = <0x77>;
+			};
+
+			cm36652@60 {
+				compatble = "cm36652";
+				reg = <0x60>;
+			};
+
+			mt6605@28 {
+				compatible = "mediatek,mt6605";
+				reg = <0x28>;
+			};
+		};
+
+		MT_SOC_DL1_PCM@0x11220000 {
+			compatible = "mediatek,mt_soc_pcm_dl1";
+			reg = <0x11220000 0x1000>;
+			interrupts = <0 144 0x8>;
+			audclk-gpio = <143 0>;
+			audmiso-gpio = <144 0>;
+			audmosi-gpio = <145 0>;
+			vowclk-gpio = <148 0>;
+			extspkamp-gpio = <129 0>;
+			extspkamp_2-gpio = <128 0>;
+			rcvspkswitch-gpio = <120 0>;						
+			i2s1clk-gpio = <135 0>;
+			i2s1dat-gpio = <137 0>;
+			i2s1mclk-gpio = <134 0>;
+			i2s1ws-gpio = <136 0>;
+		};
+
+		I2C3@0x1100F000 {
+			bq24296@6b {
+				compatible = "bq24296";
+				reg = <0x6b>;
+			};
+		};
+
+	};
+};

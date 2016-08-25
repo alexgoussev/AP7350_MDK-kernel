@@ -1,0 +1,20 @@
+#============================================== 
+# Type Declaration 
+#============================================== 
+type getsystemtype, domain; 
+type getsystemtype_exec , exec_type, file_type;
+ 
+#============================================== 
+# Android Policy Rule 
+#============================================== 
+#permissive getsystemtype; 
+domain_auto_trans(init, getsystemtype_exec, getsystemtype); 
+
+
+allow getsystemtype shell_exec:file {read };
+allow getsystemtype tmpfs:dir {write  add_name};
+allow getsystemtype tmpfs:file {create write open append};
+allow getsystemtype system_file:file {execute_no_trans };
+allow getsystemtype property_socket:sock_file {write };
+allow getsystemtype init:unix_stream_socket {connectto };
+allow getsystemtype {default_prop mediatek_prop}:property_service {set };

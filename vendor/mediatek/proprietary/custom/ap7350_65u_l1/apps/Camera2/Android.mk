@@ -1,0 +1,17 @@
+ifneq ($(MTK_BSP_PACKAGE),yes)
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_OVERRIDES_PACKAGES := Gallery2
+LOCAL_MODULE := Camera2_prebuilt
+LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_PATH := $(TARGET_OUT_APPS)
+#LOCAL_MODULE_PATH := $(TARGET_OUT_DATA_APPS)
+LOCAL_CERTIFICATE := platform
+include $(BUILD_PREBUILT)
+
+$(info "this is a prebuilt Camera2_prebuilt.apk")
+endif

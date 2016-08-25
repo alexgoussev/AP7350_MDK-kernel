@@ -1,0 +1,20 @@
+# ==============================================
+# Policy File of /system/bin/binmemsicd35240 Executable File 
+
+
+# ==============================================
+# Type Declaration
+# ==============================================
+
+type memsicd35240_exec , exec_type, file_type;
+type memsicd35240 ,domain;
+
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+init_daemon_domain(memsicd35240)
+
+allow memsicd35240 gsensor_device:chr_file { read write open };
+allow memsicd35240 msensor_device:chr_file { read write ioctl open };
+

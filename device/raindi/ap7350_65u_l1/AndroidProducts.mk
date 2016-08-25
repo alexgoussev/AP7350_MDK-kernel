@@ -1,0 +1,1 @@
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/full_ap7350_65u_l1.mk
