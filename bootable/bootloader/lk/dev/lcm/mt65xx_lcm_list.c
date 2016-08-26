@@ -93,7 +93,8 @@ extern LCM_DRIVER nt35517_dsi_vdo_lcm_drv;
 extern LCM_DRIVER hx8369_dsi_bld_lcm_drv;
 extern LCM_DRIVER hx8369_dsi_tm_lcm_drv;
 extern LCM_DRIVER otm1280a_hd720_dsi_cmd_drv;	 
-extern LCM_DRIVER otm8018b_dsi_vdo_lcm_drv;	 
+extern LCM_DRIVER otm8018b_dsi_vdo_lcm_drv;
+extern LCM_DRIVER otm8018b_dsi_vdo_xind_lcm_drv;
 extern LCM_DRIVER otm8018b_dsi_vdo_txd_fwvga_lcm_drv;
 extern LCM_DRIVER nt35512_dsi_vdo_lcm_drv;
 extern LCM_DRIVER nt35512_wvga_dsi_vdo_boe_drv;
@@ -634,6 +635,10 @@ LCM_DRIVER* lcm_driver_list[] =
 
 #if defined(OTM8018B_DSI_VDO)	
 	&otm8018b_dsi_vdo_lcm_drv, 
+#endif
+
+#if defined(OTM8018B_DSI_VDO_XIND)
+    &otm8018b_dsi_vdo_xind_lcm_drv,
 #endif
 
 #if defined(NT35512_DSI_VDO)
