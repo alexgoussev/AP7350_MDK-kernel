@@ -711,13 +711,13 @@ int mt_mt65xx_led_set_cust(struct cust_mt65xx_led *cust, int level)
         //add aw2013 rgb led by sen.luo 20150710
              case MT65XX_LED_MODE_CUST:
             if(strcmp(cust->name,"red") == 0) {
-                led = 1;
+                led = 0;
             }
             else if(strcmp(cust->name,"green") == 0) {
-                led = 2;
+                led = 1;
             }
             else {
-                led = 0;
+                led = 2;
             }
             LEDS_DEBUG("[aw2013] mt_mt65xx_led_set_cust:led=%d,level=%d\n",led,level);
             if(level == 0) {
