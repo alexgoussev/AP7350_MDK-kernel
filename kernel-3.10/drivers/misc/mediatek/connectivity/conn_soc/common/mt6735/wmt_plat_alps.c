@@ -448,6 +448,10 @@ wmt_plat_dump_pin_conf (VOID)
     #else
                 WMT_PLAT_INFO_FUNC( "GPS_LNA(not defined)\n");
     #endif
+
+    #ifdef GPIO_GPS_LNA1_PIN
+                WMT_PLAT_INFO_FUNC( "GPS_LNA1(GPIO%d)\n",GPIO_GPS_LNA1_PIN);
+    #endif
     WMT_PLAT_INFO_FUNC( "[WMT-PLAT]=>dump wmt pin configuration emds<=\n");
     return 0;
 }
@@ -734,12 +738,24 @@ wmt_plat_gps_lna_ctrl (
         mt_set_gpio_dir(GPIO_GPS_LNA_PIN, GPIO_DIR_OUT);
         mt_set_gpio_mode(GPIO_GPS_LNA_PIN, GPIO_GPS_LNA_PIN_M_GPIO);
         mt_set_gpio_out(GPIO_GPS_LNA_PIN, GPIO_OUT_ZERO);
+#ifdef GPIO_GPS_LNA1_PIN
+        mt_set_gpio_pull_enable(GPIO_GPS_LNA1_PIN, GPIO_PULL_DISABLE);
+        mt_set_gpio_dir(GPIO_GPS_LNA1_PIN, GPIO_DIR_OUT);
+        mt_set_gpio_mode(GPIO_GPS_LNA1_PIN, GPIO_GPS_LNA_PIN_M_GPIO);
+        mt_set_gpio_out(GPIO_GPS_LNA1_PIN, GPIO_OUT_ZERO);
+#endif
         break;
     case PIN_STA_OUT_H:
         mt_set_gpio_out(GPIO_GPS_LNA_PIN, GPIO_OUT_ONE);
+#ifdef GPIO_GPS_LNA1_PIN
+        mt_set_gpio_out(GPIO_GPS_LNA1_PIN, GPIO_OUT_ONE);
+#endif
         break;
     case PIN_STA_OUT_L:
         mt_set_gpio_out(GPIO_GPS_LNA_PIN, GPIO_OUT_ZERO);
+#ifdef GPIO_GPS_LNA1_PIN
+        mt_set_gpio_out(GPIO_GPS_LNA1_PIN, GPIO_OUT_ZERO);
+#endif
         break;
 
     default:
