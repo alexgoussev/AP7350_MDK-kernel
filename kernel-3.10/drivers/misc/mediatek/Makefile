@@ -322,3 +322,4 @@ obj-y	+= sensorHub/
 endif
 endif
 
+obj-$(CONFIG_MTK_ETHERNET_SUPPORT)	+= ethernet/

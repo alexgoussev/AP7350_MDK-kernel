@@ -125,6 +125,16 @@ config TRUSTONIC_TRUSTED_UI_FB_BLANK
     Blank the framebuffer before starting a TUI session
 
 #
+# net cfg for eht
+#
+
+config MTK_ETHERNET_SUPPORT
+    bool "Ethernet driver"
+    default n
+    ---help---
+    this option enable ethernet
+
+#
 # MobiCore configuration
 #
 config MOBICORE_DRIVER
