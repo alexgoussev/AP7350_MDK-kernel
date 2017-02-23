@@ -259,6 +259,7 @@
 /*Others*/
 #define SHARP3D_SENSOR_ID                       0x003d
 #define T8EV5_SENSOR_ID                         0x1011
+#define SE4750_SENSOR_ID                        0x4750
 
 /* CAMERA DRIVER NAME */
 #define CAMERA_HW_DEVNAME                       "kd_camera_hw"
@@ -393,6 +394,8 @@
 #define SENSOR_DRVNAME_T8EV5_YUV                "t8ev5_yuv"
 /*Test*/
 #define SENSOR_DRVNAME_IMX135_MIPI_RAW_5MP      "imx135mipiraw5mp"
+/* se4750 camera */
+#define SENSOR_DRVNAME_SE4750_MIPI_RAW          "se4750mipiraw"
 
 /*******************************************************************************
 *

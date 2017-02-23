@@ -8,6 +8,7 @@
 # Purpose : for L early bring up.
 allow mediaserver camera_isp_device:chr_file { read write ioctl open };
 allow mediaserver kd_camera_hw_device:chr_file { read write ioctl open };
+allow mediaserver se4750_device:chr_file { read write ioctl open };
 allow mediaserver self:capability { setuid ipc_lock };
 allow mediaserver sysfs_wake_lock:file { read write open };
 allow mediaserver MTK_SMI_device:chr_file { read ioctl open };

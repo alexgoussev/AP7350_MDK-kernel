@@ -115,6 +115,7 @@ UINT32 T4KA7_MIPI_RAW_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc);
 UINT32 ISX012_MIPI_YUV_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc);
 UINT32 T8EV5_YUV_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc);
 
+UINT32 SE4750MIPI_RAW_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc);
 //! Add Sensor Init function here
 //! Note:
 //! 1. Add by the resolution from ""large to small"", due to large sensor
@@ -391,6 +392,10 @@ ACDK_KD_SENSOR_INIT_FUNCTION_STRUCT kdSensorList[MAX_NUM_OF_SUPPORT_SENSOR+1] =
 #endif
 #if defined(GC0310_YUV)
     {GC0310_SENSOR_ID, SENSOR_DRVNAME_GC0310_YUV,GC0310_YUV_SensorInit},
+#endif
+/* se4750 */
+#if defined(SE4750_MIPI_RAW)
+    {SE4750_SENSOR_ID, SENSOR_DRVNAME_SE4750_MIPI_RAW,SE4750MIPI_RAW_SensorInit},
 #endif
 /*SP*/
 #if defined(SP0A19_YUV)

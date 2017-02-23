@@ -537,6 +537,12 @@ config SRAM
 	  the genalloc API. It is supposed to be used for small on-chip SRAM
 	  areas found on many SoCs.
 
+config SE4750
+    bool "SE4750 barcode driver"
+    default n
+    help
+      This option enables support for se4750 barcode
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"

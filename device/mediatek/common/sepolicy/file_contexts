@@ -282,6 +282,8 @@
 /dev/ttyACM0        u:object_r:ttyACM_device:s0
 /dev/hrm       u:object_r:hrm_device:s0
 
+/dev/moto_sdl u:object_r:se4750_device:s0
+
 #############################
 # sysfs files
 #
