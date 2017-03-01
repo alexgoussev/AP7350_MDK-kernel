@@ -285,7 +285,7 @@ void RecoveryUI::FlushKeys() {
 // - Press power seven times in a row to reboot.
 // - Alternate vol-up and vol-down seven times to mount /system.
 RecoveryUI::KeyAction RecoveryUI::CheckKey(int key) {
-    if ((IsKeyPressed(KEY_POWER) && key == KEY_VOLUMEUP) || key == KEY_HOMEPAGE) {
+    if ((IsKeyPressed(KEY_POWER) && key == KEY_UP)) {
         return TOGGLE;
     }
 
@@ -304,10 +304,10 @@ RecoveryUI::KeyAction RecoveryUI::CheckKey(int key) {
         consecutive_power_keys = 0;
     }
 
-    if ((key == KEY_VOLUMEUP &&
-         (last_key == KEY_VOLUMEDOWN || last_key == -1)) ||
+    if ((key == KEY_UP &&
+         (last_key == KEY_DOWN || last_key == -1)) ||
         (key == KEY_VOLUMEDOWN &&
-         (last_key == KEY_VOLUMEUP || last_key == -1))) {
+         (last_key == KEY_UP || last_key == -1))) {
         ++consecutive_alternate_keys;
         if (consecutive_alternate_keys >= 7) {
             consecutive_alternate_keys = 0;
