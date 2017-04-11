@@ -9,10 +9,11 @@ CKT_AUTO_ADD_GLOBAL_DEFINE_BY_VALUE =
 PROJ_NAME = AP7350
 CUST_NAME = RD
 SOFTCODE = S00A
-BASEVERNO =102
+BASEVERNO = V003
 #############################
 #会用他设置ro.product.model
-CKT_PRODUCT_MODEL=RD_$(strip $(PROJ_NAME) )
+CKT_PRODUCT_MODEL=$(strip $(PROJ_NAME) )
+CKT_TARGET_PRODUCT=$(strip $(PROJ_NAME) )
 #会用他设置缺省时区persist.sys.timezone
 TIMEZONE=Asia/Shanghai
 
@@ -126,14 +127,16 @@ export CKT_USER_INEMOENGINE
 
 
 ###########以下为产生的东西,一般不需要理会
-_CKT_BUILD_VERNO  = $(strip $(PROJ_NAME) )-$(strip $(SOFTCODE) )_$(strip $(CUST_NAME) )_L$(words $(subst hdpi, ,$(strip $(MTK_PRODUCT_LOCALES))))$(word 1,$(subst _, ,$(subst zh_TW,TR,$(subst zh_CN,SM,$(strip $(MTK_PRODUCT_LOCALES))))))_$(strip $(BASEVERNO))
+#_CKT_BUILD_VERNO  = $(strip $(PROJ_NAME) )-$(strip $(SOFTCODE) )_$(strip $(CUST_NAME) )_L$(words $(subst hdpi, ,$(strip $(MTK_PRODUCT_LOCALES))))$(word 1,$(subst _, ,$(subst zh_TW,TR,$(subst zh_CN,SM,$(strip $(MTK_PRODUCT_LOCALES))))))_$(strip $(BASEVERNO))
+
+_CKT_BUILD_VERNO  = $(strip $(PROJ_NAME) ).$(strip $(BASEVERNO))
 
 DATA_FOR_VERO=$(shell date +%y%m%d)
 DATA_FOR_INTERNAL_VERO=$(shell date +%y%m%d%H%M%S)
 
 #CKT_BUILD_VERNO  ?= $(call uc, $(_CKT_BUILD_VERNO)_$(strip $(DATA_FOR_VERO)))
 
-CKT_BUILD_VERNO  ?= $(shell echo $(_CKT_BUILD_VERNO)_$(strip $(DATA_FOR_VERO)) | tr '[a-z]' '[A-Z]')
+CKT_BUILD_VERNO  ?= $(shell echo $(_CKT_BUILD_VERNO).$(strip $(DATA_FOR_VERO)) | tr '[a-z]' '[A-Z]')
 
 CKT_BUILD_INTERNAL_VERNO  ?= $(shell echo $(_CKT_BUILD_VERNO)_$(strip $(DATA_FOR_INTERNAL_VERO)) | tr '[a-z]' '[A-Z]')
 #############################
