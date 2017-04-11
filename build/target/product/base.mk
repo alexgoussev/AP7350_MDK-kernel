@@ -21,6 +21,7 @@
 
 # Base modules (will move elsewhere, previously user tagged)
 PRODUCT_PACKAGES += \
+	su \
     20-dns.conf \
     95-configured \
     appwidget \

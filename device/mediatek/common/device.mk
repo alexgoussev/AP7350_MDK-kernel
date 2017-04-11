@@ -1633,3 +1633,12 @@ endif
 # Add for Raindi 20160505
 PRODUCT_PACKAGES += SNCode
 
+ifeq ($(strip $(HY_CUSTOM_RECEIVER)), yes)
+  PRODUCT_PACKAGES += HyCustomReceiver
+endif
+
+ifeq ($(strip $(GOOGLE_PINYIN_INPUTMETHOD)), yes)
+  PRODUCT_PACKAGES += GooglePinyin
+endif
+
+
