@@ -1163,8 +1163,8 @@ void mt_boot_init(const struct app_descriptor *app)
 
 	/* serial string adding */
 
-    key = get_devinfo_with_index(13);
-    key = (key << 32) | get_devinfo_with_index(12);
+    key = get_devinfo_with_index(13) & 0xffffffffffffffff;
+    key = (key << 32) | (get_devinfo_with_index(12) & 0xffffffff);
 	chip_code = DRV_Reg32(APHW_CODE);
 
 	if (key != 0)
