@@ -52,6 +52,8 @@
 #define DMA3_P2_TSEL_32F	0 // TX_MACH: FIFO model (32 bytes-limitation)
 #define DMA3_P2_TSEL_1F		0 // TX_MACH: FIFO model (1 byte-limitation)
 
+#define GPIO_DM9051_POWER_PIN   GPIO62
+
 /* ------------------------------- */
 /* - ReadWrite.configuration.table */
 /* ------------------------------- */
@@ -134,7 +136,7 @@ extern int spi_register_board_info(struct spi_board_info const *info, unsigned n
 /* Board/System/Debug information/definition ---------------- */
 
 #define DRV_INTERRUPT_1                 0
-#define DRV_POLL_0                      1 
+#define DRV_POLL_0                      1
 
 #if DRV_INTERRUPT_1
 #define DRV_VERSION	\
@@ -253,6 +255,21 @@ struct mt_chip_conf spi_fifo_conf_mt65xx = {
 	.tckdly = 0,
 };
 */
+
+void dm9051_power_en(int enable)
+{
+    if(enable){
+        mt_set_gpio_mode(GPIO_DM9051_POWER_PIN,GPIO_MODE_00);
+        mt_set_gpio_dir(GPIO_DM9051_POWER_PIN,GPIO_DIR_OUT);
+        mt_set_gpio_out(GPIO_DM9051_POWER_PIN,GPIO_OUT_ONE);
+
+        mdelay(100); /* delay needs by DM9051 */
+    }else{
+        mt_set_gpio_mode(GPIO_DM9051_POWER_PIN,GPIO_MODE_00);
+        mt_set_gpio_dir(GPIO_DM9051_POWER_PIN,GPIO_DIR_OUT);
+        mt_set_gpio_out(GPIO_DM9051_POWER_PIN,GPIO_OUT_ZERO);
+    }
+}
 
 void wbuff_u8(u8 op, u8 *txb)
 {
@@ -2745,6 +2762,8 @@ static int dm9051_open(struct net_device *dev)
     printk("\n");
 	printk("[dm951_open].s\n");
 
+    dm9051_power_en(1);
+
   #if 1
 	if (netif_msg_ifup(db))
 		dev_dbg(&db->spidev->dev, "enabling %s\n", dev->name);
@@ -2874,6 +2893,9 @@ static int dm9000_stop(struct net_device *dev)
     iow(db, DM9051_IMR, IMR_PAR);	/* Disable all interrupt */
     iow(db, DM9051_RCR, RCR_RX_DISABLE);	/* Disable RX */
     mutex_unlock(&db->addr_lock);
+
+    dm9051_power_en(0);
+
     return 0;
 }
 
@@ -3040,11 +3062,7 @@ dm9051_probe(struct spi_device *spi)
 
     printk("[ *dm9051  ] {_probe.s}\n");
 
-    mt_set_gpio_mode(GPIO62,GPIO_MODE_00);
-    mt_set_gpio_dir(GPIO62,GPIO_DIR_OUT);
-    mt_set_gpio_out(GPIO62,GPIO_OUT_ONE);
-
-    mdelay(100); /* delay needs by DM9051 */
+    dm9051_power_en(1);
 
 	ndev = alloc_etherdev(sizeof(struct board_info));
 	if (!ndev) {
@@ -3269,7 +3287,7 @@ static int dm9000_drv_suspend(struct spi_device *spi, pm_message_t state)
 {
     board_info_t *db = dev_get_drvdata(&spi->dev);
     struct net_device *ndev = db->ndev;
-	if (ndev) {
+       if (ndev) {
 		db->in_suspend = 1;
 		if (!netif_running(ndev)) {
 		    netif_device_detach(ndev);

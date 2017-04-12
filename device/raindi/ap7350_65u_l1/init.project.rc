@@ -173,7 +173,7 @@ service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
     group system
     class core
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL -f dhcpcd.conf
     class main
     disabled
     oneshot
